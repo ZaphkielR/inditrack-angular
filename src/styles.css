@@ -1,3 +1,188 @@
-/* You can add global styles to this file, and also import other style files */
+/* global styles */
 
-@import 'tailwindcss';
+/* =========================
+   TAILWIND CORE
+   ========================= */
+
+@import "tailwindcss";
+
+/* plugins */
+@plugin "flowbite/plugin";
+@plugin "flowbite-typography";
+
+/* scan sources */
+@source "./src/**/*.{html,ts}";
+@source "../node_modules/flowbite";
+
+/* flowbite theme */
+@import "flowbite/src/themes/enterprise";
+
+
+/* =========================
+   TAILWIND THEME MAPPING
+   ========================= */
+
+@theme {
+
+    /* primary color used by flowbite components */
+
+    --color-primary-50: var(--color-blue-50);
+    --color-primary-100: var(--color-blue-100);
+    --color-primary-200: var(--color-blue-200);
+    --color-primary-300: var(--color-blue-300);
+    --color-primary-400: var(--color-blue-400);
+    --color-primary-500: var(--color-blue-500);
+    --color-primary-600: var(--color-blue-600);
+    --color-primary-700: var(--color-blue-700);
+    --color-primary-800: var(--color-blue-800);
+    --color-primary-900: var(--color-blue-900);
+
+}
+
+/* =========================
+   DESIGN TOKENS
+   ========================= */
+
+:root {
+
+    /* base colors */
+
+    --color-white: #ffffff;
+
+    /* gray */
+
+    --color-gray-50: #F9FAFB;
+    --color-gray-100: #F3F4F6;
+    --color-gray-200: #E5E7EB;
+    --color-gray-300: #D1D5DB;
+    --color-gray-400: #9CA3AF;
+    --color-gray-500: #6B7280;
+    --color-gray-600: #4B5563;
+    --color-gray-700: #374151;
+    --color-gray-800: #1F2937;
+    --color-gray-900: #111827;
+
+    /* blue */
+
+    --color-blue-50: #EBF5FF;
+    --color-blue-100: #E1EFFE;
+    --color-blue-200: #C3DDFD;
+    --color-blue-300: #A4CAFE;
+    --color-blue-400: #76A9FA;
+    --color-blue-500: #3F83F8;
+    --color-blue-600: #1C64F2;
+    --color-blue-700: #1A56DB;
+    --color-blue-800: #1E429F;
+    --color-blue-900: #233876;
+
+    /* emerald */
+
+    --color-emerald-50: #F3FAF7;
+    --color-emerald-100: #DEF7EC;
+    --color-emerald-200: #BCF0DA;
+    --color-emerald-300: #84E1BC;
+    --color-emerald-400: #31C48D;
+    --color-emerald-500: #0E9F6E;
+    --color-emerald-600: #057A55;
+    --color-emerald-700: #046C4E;
+    --color-emerald-800: #03543F;
+    --color-emerald-900: #014737;
+
+    /* rose */
+
+    --color-rose-50: #FFF1F2;
+    --color-rose-100: #FFE4E6;
+    --color-rose-700: #BE123C;
+    --color-rose-800: #9F1239;
+
+    /* orange */
+
+    --color-orange-50: #FFF7ED;
+    --color-orange-100: #FFEDD5;
+    --color-orange-400: #FB923C;
+    --color-orange-500: #F97316;
+    --color-orange-700: #C2410C;
+
+    /* additional palette */
+
+    --color-purple-500: #8B5CF6;
+    --color-sky-500: #0EA5E9;
+    --color-teal-600: #0D9488;
+    --color-pink-600: #DB2777;
+    --color-cyan-500: #06B6D4;
+    --color-fuchsia-600: #C026D3;
+    --color-indigo-600: #4F46E5;
+
+
+    /* =========================
+     SEMANTIC TOKENS
+     ========================= */
+
+    /* neutral surfaces */
+
+    --color-neutral-primary-soft: var(--color-white);
+    --color-neutral-primary: var(--color-white);
+    --color-neutral-primary-medium: var(--color-white);
+    --color-neutral-primary-strong: var(--color-white);
+
+    --color-neutral-secondary-soft: var(--color-gray-50);
+    --color-neutral-secondary: var(--color-gray-50);
+    --color-neutral-secondary-medium: var(--color-gray-50);
+    --color-neutral-secondary-strong: var(--color-gray-50);
+    --color-neutral-secondary-strongest: var(--color-gray-50);
+
+    --color-neutral-tertiary-soft: var(--color-gray-100);
+    --color-neutral-tertiary: var(--color-gray-100);
+    --color-neutral-tertiary-medium: var(--color-gray-100);
+
+    --color-neutral-quaternary: var(--color-gray-200);
+    --color-neutral-quaternary-medium: var(--color-gray-200);
+
+    --color-gray: var(--color-gray-300);
+
+
+    /* brand */
+
+    --color-brand-softer: var(--color-blue-50);
+    --color-brand-soft: var(--color-blue-100);
+    --color-brand: var(--color-blue-700);
+    --color-brand-medium: var(--color-blue-200);
+    --color-brand-strong: var(--color-blue-800);
+
+
+    /* status */
+
+    --color-success-soft: var(--color-emerald-50);
+    --color-success: var(--color-emerald-700);
+    --color-success-medium: var(--color-emerald-100);
+    --color-success-strong: var(--color-emerald-800);
+
+    --color-danger-soft: var(--color-rose-50);
+    --color-danger: var(--color-rose-700);
+    --color-danger-medium: var(--color-rose-100);
+    --color-danger-strong: var(--color-rose-800);
+
+    --color-warning-soft: var(--color-orange-50);
+    --color-warning: var(--color-orange-500);
+    --color-warning-medium: var(--color-orange-100);
+    --color-warning-strong: var(--color-orange-700);
+
+
+    /* misc */
+
+    --color-dark-soft: var(--color-gray-800);
+    --color-dark: var(--color-gray-800);
+    --color-dark-strong: var(--color-gray-900);
+
+    --color-disabled: var(--color-gray-100);
+
+    --color-purple: var(--color-purple-500);
+    --color-sky: var(--color-sky-500);
+    --color-teal: var(--color-teal-600);
+    --color-pink: var(--color-pink-600);
+    --color-cyan: var(--color-cyan-500);
+    --color-fuchsia: var(--color-fuchsia-600);
+    --color-indigo: var(--color-indigo-600);
+    --color-orange: var(--color-orange-400);
+
+}
