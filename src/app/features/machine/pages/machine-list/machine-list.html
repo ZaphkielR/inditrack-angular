@@ -1,0 +1,97 @@
+@if (!loading()) {
+    <div class="flex flex-col h-full">
+        <!-- HEADER (FIJO) -->
+        <div class="flex justify-end">
+            <button
+                class="flex flex-row justify-between"
+                nz-button
+                nzType="primary"
+                nzSize="large"
+                (click)="goToCreate()"
+            >
+                <nz-icon nzType="plus"/>
+                Añadir Máquina
+            </button>
+        </div>
+
+        <!-- TABLA (SCROLLABLE) -->
+        <div class="flex-1 overflow-auto no-scrollbar py-5">
+            <nz-table [nzData]="machines()" [nzScroll]="{ x: '100%' }" nzShowPagination="false">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Modelo</th>
+                        <th>Ubicación</th>
+                        <th>Instalada</th>
+                        <th>Estado</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (data of machines(); track data.id) {
+                        <tr>
+                            <td>{{ data.id }}</td>
+                            <td>{{ data.name }}</td>
+                            <td>{{ data.model }}</td>
+                            <td>{{ data.location }}</td>
+                            <td>
+                                @if (!data.installed_at) {
+                                    -
+                                } @else {
+                                    {{ data.installed_at | dateCL }}
+                                }
+                            </td>
+                            <td>
+                                @if (data.status == 'Active') {
+                                    <nz-tag nzColor="green">Activo</nz-tag>
+                                } @else if (data.status == 'Inactive') {
+                                    <nz-tag nzColor="red">Inactivo</nz-tag>
+                                } @else {
+                                    -
+                                }
+                            </td>
+                            <td class="flex gap-5">
+                                <button
+                                    nz-button
+                                    (click)="goToEdit(data.id)"
+                                    nz-tooltip
+                                    nzTooltipTitle="Editar"
+                                >
+                                    <nz-icon nzType="edit" />
+                                </button>
+
+                                <button
+                                    nz-button
+                                    nzDanger
+                                    (click)="delete(data.id)"
+                                    nz-tooltip
+                                    nzTooltipTitle="Eliminar"
+                                >
+                                    <nz-icon nzType="delete" />
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </nz-table>
+        </div>
+
+        <!-- PAGINACIÓN (FIJA) -->
+        <div class="flex justify-end">
+            <nz-pagination
+                [nzPageIndex]="page()"
+                [nzTotal]="total()"
+                [nzPageSize]="limit()"
+                [nzShowSizeChanger]="true"
+                [nzPageSizeOptions]="[5, 10, 20, 50]"
+                (nzPageIndexChange)="onPageChange($event)"
+                (nzPageSizeChange)="onPageSizeChange($event)"
+            />
+        </div>
+    </div>
+} @else {
+    <div class="flex justify-center items-center h-full">
+        <nz-spin nzSimple nzSize="large" />
+    </div>
+}
