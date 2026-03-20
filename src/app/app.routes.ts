@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { SidebarLayout } from '@core/layout/sidebar-layout/sidebar-layout';
 import { AUTH_ROUTES } from '@features/auth/auth.routes';
 import { INCIDENT_ROUTES } from '@features/incident/incident.routes';
-import { MACHINE_ROUTES } from '@features/machine/pages/machine.routes';
+import { MACHINE_ROUTES } from '@features/machine/machine.routes';
 import { MAINTENANCE_ROUTES } from '@features/maintenance/maintenance.routes';
 import { USER_ROUTES } from '@features/user/user.routes';
 

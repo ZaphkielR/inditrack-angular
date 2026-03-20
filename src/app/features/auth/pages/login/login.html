@@ -1,1 +1,49 @@
-<p>login works!</p>
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-lg px-8 py-12 flex flex-col gap-12">
+        <h2 class="text-2xl font-semibold text-center">Iniciar sesión</h2>
+
+        <form
+            nz-form
+            [formGroup]="validateForm"
+            class="flex flex-col gap-5"
+            (ngSubmit)="submitForm()"
+        >
+            <nz-form-item nzRequired>
+                <nz-form-control nzErrorTip="Por favor ingresa tu usuario">
+                    <nz-input-wrapper>
+                        <nz-icon nzInputPrefix nzType="user" class="mr-4" />
+                        <input
+                            type="text"
+                            nz-input
+                            formControlName="email"
+                            placeholder="usuario@ejemplo.com"
+                            class="rounded-lg"
+                        />
+                    </nz-input-wrapper>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nzRequired>
+                <nz-form-control nzErrorTip="Por favor ingresa tu contraseña">
+                    <nz-input-password>
+                        <nz-icon nzInputPrefix nzType="lock" class="mr-4" />
+                        <input
+                            nz-input
+                            formControlName="password"
+                            placeholder="Password"
+                            class="rounded-lg"
+                        />
+                    </nz-input-password>
+                </nz-form-control>
+            </nz-form-item>
+
+            <button
+                nz-button
+                nzType="primary"
+                class="w-full rounded-lg h-11 text-base font-medium transition hover:scale-[1.02]"
+            >
+                Iniciar Sesión
+            </button>
+        </form>
+    </div>
+</div>
