@@ -1,1 +1,107 @@
-<p>incident-list works!</p>
+@if (!loading()) {
+    <div class="flex flex-col h-full">
+        <!-- TABLA (SCROLLABLE) -->
+        <div class="flex-1 overflow-auto no-scrollbar py-5">
+            <nz-table [nzData]="incidents()" [nzScroll]="{ x: '100%' }" nzShowPagination="false">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción</th>
+                        <th>Turno</th>
+                        <th>Prioridad</th>
+                        <th>Estado</th>
+                        <th>Resuelto</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (data of incidents(); track data.id) {
+                        <tr>
+                            <td>{{ data.id }}</td>
+
+                            <td class="whitespace-pre-line">
+                                <app-modal
+                                    title="Descripción del incidente"
+                                    [content]="data.description"
+                                >
+                                    <a nz-button nzType="text">Leer descripción</a>
+                                </app-modal>
+                            </td>
+                            <td>
+                                @if (data.shift == SHIFT_ENUM.DAY) {
+                                    Diurno
+                                } @else {
+                                    Nocturno
+                                }
+                            </td>
+                            <td>
+                                @if (data.priority_level == PRIORITY_ENUM.LOW) {
+                                    <nz-tag nzColor="yellow"> Bajo </nz-tag>
+                                } @else if (data.priority_level == PRIORITY_ENUM.MEDIUM) {
+                                    <nz-tag nzColor="gold"> Medio </nz-tag>
+                                } @else if (data.priority_level == PRIORITY_ENUM.HIGH) {
+                                    <nz-tag nzColor="orange"> Alto </nz-tag>
+                                } @else {
+                                    <nz-tag nzColor="red"> Crítico </nz-tag>
+                                }
+                            </td>
+                            <td>
+                                @if (data.status == STATUS_ENUM.OPEN) {
+                                    <nz-tag nzColor="red">Abierto</nz-tag>
+                                } @else if (data.status == STATUS_ENUM.IN_PROGRESS) {
+                                    <nz-tag nzColor="yellow">En Progreso</nz-tag>
+                                } @else {
+                                    <nz-tag nzColor="green">Resuelto</nz-tag>
+                                }
+                            </td>
+                            <td>
+                                @if (!data.resolved_at) {
+                                    -
+                                } @else {
+                                    {{ data.resolved_at | dateCL }}
+                                }
+                            </td>
+                            <td class="flex gap-5">
+                                <button
+                                    nz-button
+                                    (click)="goToEdit(data.id)"
+                                    nz-tooltip
+                                    nzTooltipTitle="Editar"
+                                >
+                                    <nz-icon nzType="edit" />
+                                </button>
+
+                                <button
+                                    nz-button
+                                    nzDanger
+                                    (click)="delete(data.id)"
+                                    nz-tooltip
+                                    nzTooltipTitle="Eliminar"
+                                >
+                                    <nz-icon nzType="delete" />
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </nz-table>
+        </div>
+
+        <!-- PAGINACIÓN (FIJA) -->
+        <div class="flex justify-end">
+            <nz-pagination
+                [nzPageIndex]="page()"
+                [nzTotal]="total()"
+                [nzPageSize]="limit()"
+                [nzShowSizeChanger]="true"
+                [nzPageSizeOptions]="[5, 10, 20, 50]"
+                (nzPageIndexChange)="onPageChange($event)"
+                (nzPageSizeChange)="onPageSizeChange($event)"
+            />
+        </div>
+    </div>
+} @else {
+    <div class="flex justify-center items-center h-full">
+        <nz-spin nzSimple nzSize="large" />
+    </div>
+}

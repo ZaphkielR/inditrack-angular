@@ -1,0 +1,17 @@
+<span (click)="showModal()">
+    <ng-content></ng-content>
+</span>
+
+<nz-modal
+    nzDraggable
+    nzCentered
+    nzClosable="false"
+    [nzCancelText]="null"
+    [(nzVisible)]="isVisible"
+    [nzTitle]="title"
+    (nzOnOk)="handleOk()"
+>
+    <ng-container *nzModalContent>
+        <p class="text-justify">{{ content }}</p>
+    </ng-container>
+</nz-modal>

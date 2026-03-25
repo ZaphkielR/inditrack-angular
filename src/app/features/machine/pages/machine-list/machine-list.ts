@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MachineFilterInterface } from '@features/machine/interface/machine-filter.interface';
 import { MachineInterface } from '@features/machine/interface/machine.interface';
 import { MachineService } from '@features/machine/machine.service';
+import { PaginateInterface } from '@shared/interface/paginate.interface';
 import { DateCLPipe } from '@shared/pipes/date-cl-pipe';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -52,7 +53,7 @@ export class MachineList implements OnInit {
     loadMachines(): void {
         this.loading.set(true);
         this.machineService.getMachines(this.page(), this.limit(), this.filters()).subscribe({
-            next: (response) => {
+            next: (response: PaginateInterface<MachineInterface>) => {
                 this.machines.set(response.items);
                 this.total.set(response.total);
                 this.loading.set(false);
